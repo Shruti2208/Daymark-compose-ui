@@ -24,7 +24,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.daymark_compose_ui.R
+import com.example.daymark_compose_ui.ui.components.FeaturedSectionHeader
 import com.example.daymark_compose_ui.ui.theme.DaymarkcomposeuiTheme
 
 @Composable
@@ -101,14 +101,10 @@ fun TodayScreen(onSeeAllHabits: () -> Unit, modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(24.dp))
 
         // 4. Today's habits
-        Row(modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically) {
-            Text("Today’s Habits", style = MaterialTheme.typography.titleLarge)
-            TextButton(onClick = onSeeAllHabits) {
-                Text("See all →")
-            }
-        }
+        FeaturedSectionHeader(
+            title = stringResource(R.string.today_habits),
+            onSeeAll = onSeeAllHabits
+        )
         Column(
             modifier = Modifier.padding(bottom = 8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)

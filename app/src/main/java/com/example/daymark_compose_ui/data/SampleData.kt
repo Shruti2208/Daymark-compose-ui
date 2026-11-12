@@ -6,6 +6,7 @@ import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.outlined.Laptop
 import androidx.compose.material.icons.outlined.SelfImprovement
 import androidx.compose.material.icons.outlined.WaterDrop
+import com.example.daymark_compose_ui.R
 
 class SampleData {
 
@@ -31,5 +32,18 @@ class SampleData {
         Habit("Drink water", "Health", Icons.Outlined.WaterDrop, 4, 7),
         Habit("Meditate", "Mind", Icons.Outlined.SelfImprovement, 3, 7),
         Habit("Deep work", "Productivity", Icons.Outlined.Laptop, 5, 7)
+    )
+    val samplePlaces = listOf(
+        Place(
+            id = 1,
+            name = "Lake Crescent",
+            location = "Olympic National Park",
+            imageRes = R.drawable.place_lake_crescent,
+            rating = 4.8,
+            reviewCount = "1.2k"
+        ),
+        Place(2, "Cape Kiwanda", "Oregon Coast", R.drawable.place_cape_kiwanda, 4.7, "892"),
+        Place(3, "Twin Falls", "Snoqualmie, WA", R.drawable.place_twin_falls, 4.6, "640"),
+        Place(4, "Mount Rainier", "Pierce County, WA", R.drawable.place_mount_rainier, 4.9, "2.3k")
     )
 }

@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.daymark_compose_ui.ui.components.explore.ExploreScreen
 import com.example.daymark_compose_ui.ui.components.habits.HabitsScreen
 import com.example.daymark_compose_ui.ui.components.today.TodayScreen
 
@@ -20,8 +21,11 @@ internal fun DaymarkApp() {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val todayRoute = requireNotNull(DaymarkTab.Today.route)
     val habitsRoute = requireNotNull(DaymarkTab.Habits.route)
+    val exploreRoute = requireNotNull(DaymarkTab.Explore.route)
+
     val selectedTab = when (backStackEntry?.destination?.route) {
         habitsRoute -> DaymarkTab.Habits
+        exploreRoute -> DaymarkTab.Explore
         else -> DaymarkTab.Today
     }
     val selectTab: (DaymarkTab) -> Unit = { tab ->
@@ -50,6 +54,9 @@ internal fun DaymarkApp() {
             }
             composable(habitsRoute) {
                 HabitsScreen()
+            }
+            composable(exploreRoute) {
+                ExploreScreen()
             }
         }
     }

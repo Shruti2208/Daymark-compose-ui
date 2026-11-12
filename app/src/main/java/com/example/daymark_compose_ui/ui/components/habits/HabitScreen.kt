@@ -1,6 +1,5 @@
 package com.example.daymark_compose_ui.ui.components.habits
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,10 +11,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.FilterChip
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Eco
+import androidx.compose.material.icons.outlined.Layers
+import androidx.compose.material.icons.outlined.Spa
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -36,6 +36,8 @@ import androidx.compose.ui.unit.dp
 import com.example.daymark_compose_ui.R
 import com.example.daymark_compose_ui.data.Habit
 import com.example.daymark_compose_ui.data.SampleData
+import com.example.daymark_compose_ui.ui.components.CategoryFilterOption
+import com.example.daymark_compose_ui.ui.components.CategoryFilterRow
 import com.example.daymark_compose_ui.ui.theme.DaymarkcomposeuiTheme
 
 @Composable
@@ -87,23 +89,23 @@ private fun HabitsContent(sampleData: SampleData, habits: List<Habit>?) {
                     }
                 }
                 Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()).selectableGroup(),
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    sampleData.filters.forEach { filter ->
-                        FilterChip(
-                            selected = selectedFilter == filter,
-                            onClick = { selectedFilter = filter },
-                            label = { Text(filter) },
-                            shape = CircleShape,
-                            colors = FilterChipDefaults.filterChipColors(
-                                containerColor = Color(0xFFF1F1F1),
-                                selectedContainerColor = Color(0xFFD9D9D9)
-                            )
-                        )
-                    }
-                }
+                CategoryFilterRow(
+                    options = sampleData.filters.map { filter ->
+                        val icon = when (filter) {
+                            "Health" -> Icons.Outlined.Eco
+                            "Mind" -> Icons.Outlined.Spa
+                            "Productivity" -> Icons.Outlined.Layers
+                            else -> null
+                        }
+                        CategoryFilterOption(id = filter, icon = icon)
+                    },
+                    selectedId = selectedFilter,
+                    onSelect = { selectedFilter = it },
+                    colors = FilterChipDefaults.filterChipColors(
+                        containerColor = Color(0xFFF1F1F1),
+                        selectedContainerColor = Color(0xFFD9D9D9)
+                    )
+                )
                 Spacer(modifier = Modifier.height(15.dp))
             }
         }

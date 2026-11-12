@@ -35,7 +35,7 @@ internal enum class DaymarkTab(
 ) {
     Today(R.string.tab_today, Icons.Outlined.Home, Icons.Filled.Home, "today"),
     Habits(R.string.tab_habits, Icons.Outlined.CheckCircle, Icons.Filled.CheckCircle, "habits"),
-    Explore(R.string.tab_explore, Icons.Outlined.Place, Icons.Filled.Place),
+    Explore(R.string.tab_explore, Icons.Outlined.Place, Icons.Filled.Place,"explore"),
     Journal(
         R.string.tab_journal,
         Icons.AutoMirrored.Outlined.MenuBook,
