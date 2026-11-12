@@ -1,4 +1,4 @@
-package com.example.daymark_compose_ui.ui.components
+package com.example.daymark_compose_ui.ui.components.today
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

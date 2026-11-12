@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.daymark_compose_ui.ui.components.TodayScreen
+import com.example.daymark_compose_ui.ui.components.DaymarkApp
 import com.example.daymark_compose_ui.ui.theme.DaymarkcomposeuiTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             DaymarkcomposeuiTheme {
-                TodayScreen()
+                DaymarkApp()
             }
         }
     }

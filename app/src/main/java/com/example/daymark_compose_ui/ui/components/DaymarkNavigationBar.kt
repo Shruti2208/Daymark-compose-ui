@@ -30,10 +30,11 @@ import com.example.daymark_compose_ui.R
 internal enum class DaymarkTab(
     @param:StringRes val label: Int,
     val outlinedIcon: ImageVector,
-    val filledIcon: ImageVector
+    val filledIcon: ImageVector,
+    val route: String? = null
 ) {
-    Today(R.string.tab_today, Icons.Outlined.Home, Icons.Filled.Home),
-    Habits(R.string.tab_habits, Icons.Outlined.CheckCircle, Icons.Filled.CheckCircle),
+    Today(R.string.tab_today, Icons.Outlined.Home, Icons.Filled.Home, "today"),
+    Habits(R.string.tab_habits, Icons.Outlined.CheckCircle, Icons.Filled.CheckCircle, "habits"),
     Explore(R.string.tab_explore, Icons.Outlined.Place, Icons.Filled.Place),
     Journal(
         R.string.tab_journal,
@@ -68,6 +69,7 @@ internal fun DaymarkNavigationBar(
                 val selected = tab == selectedTab
                 NavigationBarItem(
                     selected = selected,
+                    enabled = tab.route != null,
                     onClick = { onTabSelected(tab) },
                     icon = {
                         Icon(
