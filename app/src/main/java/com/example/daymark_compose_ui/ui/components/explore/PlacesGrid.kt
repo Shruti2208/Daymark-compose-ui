@@ -16,6 +16,7 @@ internal fun PlacesGrid(
     places: List<Place>,
     favoriteIds: IntArray,
     onToggleFavorite: (Int) -> Unit,
+    onPlaceClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
     header: @Composable () -> Unit
 ) {
@@ -31,7 +32,8 @@ internal fun PlacesGrid(
             PlaceCard(
                 place = place,
                 isFavorite = place.id in favoriteIds,
-                onToggleFavorite = { onToggleFavorite(place.id) }
+                onToggleFavorite = { onToggleFavorite(place.id) },
+                onClick = { onPlaceClick(place.id) }
             )
         }
     }

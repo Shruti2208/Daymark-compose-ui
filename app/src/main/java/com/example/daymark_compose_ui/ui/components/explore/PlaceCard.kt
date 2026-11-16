@@ -1,5 +1,6 @@
 package com.example.daymark_compose_ui.ui.components.explore
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -39,22 +40,19 @@ internal fun PlaceCard(
     place: Place,
     isFavorite: Boolean,
     onToggleFavorite: () -> Unit,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val colors = MaterialTheme.colorScheme
     Card(
+        onClick = onClick,
         modifier = modifier.fillMaxWidth(),
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(containerColor = colors.surfaceContainerLowest),
         border = BorderStroke(1.dp, colors.surface)
     ) {
         Box {
-            Image(
-                painter = painterResource(place.imageRes),
-                contentDescription = null,
-                modifier = Modifier.fillMaxWidth().aspectRatio(1.55f),
-                contentScale = ContentScale.Crop
-            )
+            PlaceImage(place, Modifier.fillMaxWidth().aspectRatio(1.55f))
             FavoriteButton(
                 placeName = place.name,
                 isFavorite = isFavorite,
@@ -82,15 +80,26 @@ internal fun PlaceCard(
 }
 
 @Composable
-private fun FavoriteButton(
+internal fun PlaceImage(place: Place, modifier: Modifier = Modifier) {
+    Image(
+        painter = painterResource(place.imageRes),
+        contentDescription = null,
+        modifier = modifier,
+        contentScale = ContentScale.Crop
+    )
+}
+
+@Composable
+internal fun FavoriteButton(
     placeName: String,
     isFavorite: Boolean,
     onToggle: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    overImage: Boolean = true
 ) {
     IconToggleButton(checked = isFavorite, onCheckedChange = { onToggle() }, modifier = modifier) {
         Box(
-            modifier = Modifier.size(32.dp).background(Color.Black.copy(alpha = 0.45f), CircleShape),
+            modifier = Modifier.size(32.dp).background(if (overImage) Color.Black.copy(alpha = 0.45f) else Color.Transparent, CircleShape),
             contentAlignment = Alignment.Center
         ) {
             Icon(
@@ -100,14 +109,17 @@ private fun FavoriteButton(
                     placeName
                 ),
                 modifier = Modifier.size(19.dp),
-                tint = Color.White
+                tint = if (overImage) Color.White else MaterialTheme.colorScheme.onBackground
             )
         }
     }
 }
 
 @Composable
-private fun RatingRow(place: Place) {
+internal fun RatingRow(
+    place: Place,
+    @StringRes reviewCountRes: Int = R.string.place_rating
+) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -119,7 +131,7 @@ private fun RatingRow(place: Place) {
             tint = Color(0xFFAD6800)
         )
         Text(
-            text = stringResource(R.string.place_rating, place.rating, place.reviewCount),
+            text = stringResource(reviewCountRes, place.rating, place.reviewCount),
             style = MaterialTheme.typography.labelSmall
         )
     }

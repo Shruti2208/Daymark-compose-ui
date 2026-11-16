@@ -13,6 +13,15 @@
     <string name="place_add_favorite">Add %1$s to favorites</string>
     <string name="place_remove_favorite">Remove %1$s from favorites</string>
     <string name="place_rating">%1$.1f (%2$s)</string>
+    <string name="place_detail_rating">%1$.1f (%2$s reviews)</string>
+    <string name="place_back">Back</string>
+    <string name="place_share">Share place</string>
+    <string name="place_unavailable">This place is unavailable.</string>
+    <string name="place_save">Save to Places</string>
+    <string name="place_saved">Saved to Places</string>
+    <string name="place_elevation">Elevation</string>
+    <string name="place_trail_length">Trail length</string>
+    <string name="place_estimated_time">Est. time</string>
     <string name="explore_reading">Reading</string>
     <string name="explore_routines">Routines</string>
     <string name="explore_ideas">Ideas</string>

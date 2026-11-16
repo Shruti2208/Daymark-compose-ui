@@ -40,7 +40,12 @@ class SampleData {
             location = "Olympic National Park",
             imageRes = R.drawable.place_lake_crescent,
             rating = 4.8,
-            reviewCount = "1.2k"
+            reviewCount = "1.2k",
+            description = "A clear glacial lake framed by forest and mountains. Walk along the shoreline, stop for a picnic, or take in the view from the water.",
+            tags = listOf("Olympic National Park", "Hiking", "Nature"),
+            elevation = "573 ft",
+            trailLength = "2.4 mi",
+            estimatedTime = "1–2 hr"
         ),
         Place(2, "Cape Kiwanda", "Oregon Coast", R.drawable.place_cape_kiwanda, 4.7, "892"),
         Place(3, "Twin Falls", "Snoqualmie, WA", R.drawable.place_twin_falls, 4.6, "640"),

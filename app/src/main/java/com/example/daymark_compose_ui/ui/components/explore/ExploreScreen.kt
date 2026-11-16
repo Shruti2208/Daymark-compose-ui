@@ -29,7 +29,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -44,17 +43,20 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.example.daymark_compose_ui.R
-import com.example.daymark_compose_ui.data.SampleData
+import com.example.daymark_compose_ui.data.Place
 import com.example.daymark_compose_ui.ui.components.CategoryFilterOption
 import com.example.daymark_compose_ui.ui.components.CategoryFilterRow
 import com.example.daymark_compose_ui.ui.components.FeaturedSectionHeader
 
 @Composable
-fun ExploreScreen() {
+internal fun ExploreScreen(
+    places: List<Place>,
+    favoriteIds: IntArray,
+    onToggleFavorite: (Int) -> Unit,
+    onPlaceClick: (Int) -> Unit
+) {
     var query by rememberSaveable { mutableStateOf("") }
     var selectedCategory by rememberSaveable { mutableStateOf("places") }
-    var favoriteIds by rememberSaveable { mutableStateOf(intArrayOf()) }
-    val places = remember { SampleData().samplePlaces }
     val showPlaces = selectedCategory == "places"
     val searchTerm = query.trim()
     val visiblePlaces = if (showPlaces) {
@@ -69,13 +71,8 @@ fun ExploreScreen() {
     PlacesGrid(
         places = visiblePlaces,
         favoriteIds = favoriteIds,
-        onToggleFavorite = { id ->
-            favoriteIds = if (id in favoriteIds) {
-                favoriteIds.filterNot { it == id }.toIntArray()
-            } else {
-                favoriteIds + id
-            }
-        },
+        onToggleFavorite = onToggleFavorite,
+        onPlaceClick = onPlaceClick,
         modifier = Modifier.fillMaxSize(),
     ) {
         Column {
