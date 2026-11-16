@@ -26,6 +26,13 @@
     <string name="explore_routines">Routines</string>
     <string name="explore_ideas">Ideas</string>
     <string name="tab_journal">Journal</string>
+    <string name="journal_search">Search journal</string>
+    <string name="journal_add_entry">Add journal entry</string>
+    <string name="journal_previous_month">Previous month</string>
+    <string name="journal_next_month">Next month</string>
+    <string name="journal_empty_month">No entries this month.</string>
+    <string name="journal_entry_options">Options for %1$s</string>
+    <string name="journal_share_entry">Share entry</string>
     <string name="tab_profile">Profile</string>
     <string name="habits_loading">Loading habits…</string>
     <string name="habits_empty_filter">No habits in this category.</string>

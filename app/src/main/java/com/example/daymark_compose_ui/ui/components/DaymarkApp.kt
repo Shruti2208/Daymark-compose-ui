@@ -21,6 +21,7 @@ import com.example.daymark_compose_ui.ui.components.explore.ExploreScreen
 import com.example.daymark_compose_ui.ui.components.explore.placeDetails.PlaceDetailsScreen
 import com.example.daymark_compose_ui.data.SampleData
 import com.example.daymark_compose_ui.ui.components.habits.HabitsScreen
+import com.example.daymark_compose_ui.ui.components.journal.JournalScreen
 import com.example.daymark_compose_ui.ui.components.today.TodayScreen
 
 @Composable
@@ -31,7 +32,12 @@ internal fun DaymarkApp() {
     val habitsRoute = requireNotNull(DaymarkTab.Habits.route)
     val exploreRoute = requireNotNull(DaymarkTab.Explore.route)
     val detailsRoute = "$exploreRoute/place/{placeId}"
+    val journalRoute = requireNotNull(DaymarkTab.Journal.route)
+
     val places = remember { SampleData().samplePlaces }
+    val journalEntries = remember { SampleData().sampleJournalEntries }
+    val sampleWeek = remember { SampleData().sampleWeek }
+
     var favoriteIds by rememberSaveable { mutableStateOf(intArrayOf()) }
     val toggleFavorite: (Int) -> Unit = { id ->
         favoriteIds = if (id in favoriteIds) {
@@ -44,6 +50,7 @@ internal fun DaymarkApp() {
     val selectedTab = when (backStackEntry?.destination?.route) {
         habitsRoute -> DaymarkTab.Habits
         exploreRoute -> DaymarkTab.Explore
+        journalRoute -> DaymarkTab.Journal
         else -> DaymarkTab.Today
     }
     val selectTab: (DaymarkTab) -> Unit = { tab ->
@@ -86,6 +93,9 @@ internal fun DaymarkApp() {
                         navController.navigate("$exploreRoute/place/$id") { launchSingleTop = true }
                     }
                 )
+            }
+            composable (journalRoute){
+                JournalScreen(journalEntries)
             }
             composable(detailsRoute, arguments = listOf(navArgument("placeId") { type = NavType.IntType })) { entry ->
                 val placeId = entry.arguments?.getInt("placeId")

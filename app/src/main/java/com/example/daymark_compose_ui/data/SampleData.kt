@@ -51,4 +51,27 @@ class SampleData {
         Place(3, "Twin Falls", "Snoqualmie, WA", R.drawable.place_twin_falls, 4.6, "640"),
         Place(4, "Mount Rainier", "Pierce County, WA", R.drawable.place_mount_rainier, 4.9, "2.3k")
     )
+    val sampleJournalEntries = listOf(
+        JournalEntry(
+            id = 1,
+            date = "2026-01-29",
+            title = "A slower, calmer day",
+            body = "Took a long walk by the water this evening. It felt good to put the phone away and pay attention to the changing light.",
+            imageRes = R.drawable.journal_calmer_day
+        ),
+        JournalEntry(
+            id = 2,
+            date = "2026-01-26",
+            title = "Reading momentum",
+            body = "Finished the first half of the book today. Reading a few pages with my morning coffee is starting to feel like a routine.",
+            imageRes = R.drawable.journal_reading_momentum
+        ),
+        JournalEntry(
+            id = 3,
+            date = "2026-01-23",
+            title = "Gratitude",
+            body = "Thankful for good food, clear air, and time to focus. The mountain view was a reminder to slow down and look around.",
+            imageRes = R.drawable.journal_gratitude
+        )
+    )
 }

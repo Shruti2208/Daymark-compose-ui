@@ -39,7 +39,7 @@ internal enum class DaymarkTab(
     Journal(
         R.string.tab_journal,
         Icons.AutoMirrored.Outlined.MenuBook,
-        Icons.AutoMirrored.Filled.MenuBook
+        Icons.AutoMirrored.Filled.MenuBook,"journal"
     ),
     Profile(R.string.tab_profile, Icons.Outlined.Person, Icons.Filled.Person)
 }
