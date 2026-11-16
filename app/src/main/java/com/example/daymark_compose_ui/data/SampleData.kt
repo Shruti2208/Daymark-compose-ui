@@ -4,7 +4,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.DirectionsRun
 import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.outlined.Laptop
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material.icons.outlined.Palette
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.SelfImprovement
+import androidx.compose.material.icons.outlined.Sync
 import androidx.compose.material.icons.outlined.WaterDrop
 import com.example.daymark_compose_ui.R
 
@@ -73,5 +78,12 @@ class SampleData {
             body = "Thankful for good food, clear air, and time to focus. The mountain view was a reminder to slow down and look around.",
             imageRes = R.drawable.journal_gratitude
         )
+    )
+    val sampleSettingsItems = listOf(
+        SettingsItem("account", "Account", "Profile, email, and privacy", Icons.Outlined.Person),
+        SettingsItem("notifications", "Notifications", "Reminders and daily summary", Icons.Outlined.Notifications),
+        SettingsItem("appearance", "Appearance", "Light / Dark theme", Icons.Outlined.Palette),
+        SettingsItem("data_sync", "Data & Sync", "Back up and restore your data", Icons.Outlined.Sync),
+        SettingsItem("about", "About DAYMARK", "Version 1.0.0", Icons.Outlined.Info)
     )
 }

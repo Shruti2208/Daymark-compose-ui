@@ -4,14 +4,11 @@ import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -34,17 +31,17 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.daymark_compose_ui.R
 import com.example.daymark_compose_ui.data.Place
+import com.example.daymark_compose_ui.ui.components.StatItem
+import com.example.daymark_compose_ui.ui.components.StatsRow
 import com.example.daymark_compose_ui.ui.components.explore.FavoriteButton
 import com.example.daymark_compose_ui.ui.components.explore.PlaceImage
 import com.example.daymark_compose_ui.ui.components.explore.RatingRow
@@ -165,34 +162,8 @@ private fun PlaceStats(place: Place) {
         Triple(R.string.place_elevation, place.elevation, Icons.Outlined.Terrain),
         Triple(R.string.place_trail_length, place.trailLength, Icons.Outlined.Route),
         Triple(R.string.place_estimated_time, place.estimatedTime, Icons.Outlined.AccessTime)
-    ).filter { (_, value, _) -> value != null }
-    if (stats.isEmpty()) return
-
-    Surface(
-        modifier = Modifier.fillMaxWidth(),
-        shape = MaterialTheme.shapes.medium,
-        color = MaterialTheme.colorScheme.surface
-    ) {
-        Row(
-            modifier = Modifier.padding(vertical = 12.dp).height(IntrinsicSize.Min),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            stats.forEachIndexed { index, (label, value, icon) ->
-                if (index > 0) {
-                    VerticalDivider(
-                        modifier = Modifier.fillMaxHeight(),
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.14f)
-                    )
-                }
-                Column(
-                    modifier = Modifier.weight(1f).padding(horizontal = 4.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Icon(icon, contentDescription = null, modifier = Modifier.size(18.dp))
-                    Text(stringResource(label), style = MaterialTheme.typography.labelSmall, textAlign = TextAlign.Center)
-                    Text(value.orEmpty(), style = MaterialTheme.typography.titleSmall, textAlign = TextAlign.Center)
-                }
-            }
-        }
+    ).mapNotNull { (label, value, icon) ->
+        value?.let { StatItem(stringResource(label), it, icon) }
     }
+    StatsRow(stats)
 }

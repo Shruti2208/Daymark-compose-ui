@@ -22,10 +22,11 @@ import com.example.daymark_compose_ui.ui.components.explore.placeDetails.PlaceDe
 import com.example.daymark_compose_ui.data.SampleData
 import com.example.daymark_compose_ui.ui.components.habits.HabitsScreen
 import com.example.daymark_compose_ui.ui.components.journal.JournalScreen
+import com.example.daymark_compose_ui.ui.components.profile.ProfileScreen
 import com.example.daymark_compose_ui.ui.components.today.TodayScreen
 
 @Composable
-internal fun DaymarkApp() {
+internal fun DaymarkApp(darkTheme: Boolean, onThemeChange: (Boolean) -> Unit) {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val todayRoute = requireNotNull(DaymarkTab.Today.route)
@@ -33,10 +34,11 @@ internal fun DaymarkApp() {
     val exploreRoute = requireNotNull(DaymarkTab.Explore.route)
     val detailsRoute = "$exploreRoute/place/{placeId}"
     val journalRoute = requireNotNull(DaymarkTab.Journal.route)
+    val profileRoute = requireNotNull(DaymarkTab.Profile.route)
 
     val places = remember { SampleData().samplePlaces }
     val journalEntries = remember { SampleData().sampleJournalEntries }
-    val sampleWeek = remember { SampleData().sampleWeek }
+    val settingsOptions = remember { SampleData().sampleSettingsItems }
 
     var favoriteIds by rememberSaveable { mutableStateOf(intArrayOf()) }
     val toggleFavorite: (Int) -> Unit = { id ->
@@ -51,6 +53,7 @@ internal fun DaymarkApp() {
         habitsRoute -> DaymarkTab.Habits
         exploreRoute -> DaymarkTab.Explore
         journalRoute -> DaymarkTab.Journal
+        profileRoute -> DaymarkTab.Profile
         else -> DaymarkTab.Today
     }
     val selectTab: (DaymarkTab) -> Unit = { tab ->
@@ -96,6 +99,9 @@ internal fun DaymarkApp() {
             }
             composable (journalRoute){
                 JournalScreen(journalEntries)
+            }
+            composable(profileRoute) {
+                ProfileScreen(settingsOptions, darkTheme, onThemeChange)
             }
             composable(detailsRoute, arguments = listOf(navArgument("placeId") { type = NavType.IntType })) { entry ->
                 val placeId = entry.arguments?.getInt("placeId")

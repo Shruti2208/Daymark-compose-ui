@@ -41,7 +41,7 @@ internal enum class DaymarkTab(
         Icons.AutoMirrored.Outlined.MenuBook,
         Icons.AutoMirrored.Filled.MenuBook,"journal"
     ),
-    Profile(R.string.tab_profile, Icons.Outlined.Person, Icons.Filled.Person)
+    Profile(R.string.tab_profile, Icons.Outlined.Person, Icons.Filled.Person,"profile")
 }
 
 @Composable
